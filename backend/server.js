@@ -1,8 +1,10 @@
-const path = require('path');
+/*const path = require('path');
 const dotenv = require('dotenv');
 
 dotenv.config({ path: path.resolve(__dirname, '.env'), override: true });
-console.log('Loaded backend .env, Judge0 API key loaded:', !!process.env.JUDGE0_API_KEY);
+console.log('Loaded backend .env, Judge0 API key loaded:', !!process.env.JUDGE0_API_KEY);*/
+
+require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
