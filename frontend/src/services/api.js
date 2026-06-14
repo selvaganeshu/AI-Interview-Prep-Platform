@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://ai-interview-prep-backend-qkhf.onrender.com/api';
 
 const api = axios.create({
   baseURL: API_URL,
+  withCredentials: true, 
 });
 
 api.interceptors.request.use(
@@ -38,17 +39,15 @@ api.interceptors.response.use(
       });
     }
 
-    // If token is invalid or expired, clear stored tokens and redirect to login
     if (error.response?.status === 401) {
       try {
         localStorage.removeItem('token');
         sessionStorage.removeItem('token');
-        // navigate to login page
         if (typeof window !== 'undefined') {
           window.location.href = '/login';
         }
       } catch (e) {
-        // ignore
+        console.error('Error clearing tokens or redirecting to login:', e);
       }
     }
 
